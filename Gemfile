@@ -51,6 +51,7 @@ gem 'hirb'
 group :development, :test do
   gem 'dotenv-rails'
   gem 'twitter-bootstrap-rails'
+  gem 'faker'
 end
 
 group :production do

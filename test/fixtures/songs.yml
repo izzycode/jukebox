@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  tile: MyString
+  artist: MyString
+  bpm: 1
+
+two:
+  tile: MyString
+  artist: MyString
+  bpm: 1
