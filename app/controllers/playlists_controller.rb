@@ -4,7 +4,7 @@ class PlaylistsController < ApplicationController
   # GET /playlists
   # GET /playlists.json
   def index
-    @playlists = Playlist.all
+    @playlists = Playlist.order(:name)
   end
 
   # GET /playlists/1
@@ -71,4 +71,5 @@ class PlaylistsController < ApplicationController
     def playlist_params
       params.require(:playlist).permit(:name, :genre)
     end
+
 end

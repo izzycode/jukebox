@@ -1,15 +1,13 @@
-<%- model_class = Playlist -%>
+<% model_class = Playlist %>
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:name) %></th>
-      <th><%= model_class.human_attribute_name(:genre) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      <th><%= model_class.human_attribute_name(:name) %> <i class="fa fa-sort"></i></th>
+      <th><%= model_class.human_attribute_name(:genre) %> <i class="fa fa-sort"></i></th>
+    </tr>
     </tr>
   </thead>
   <tbody>
@@ -17,21 +15,53 @@
       <tr>
         <td><%= link_to playlist.name, playlist_path(playlist) %></td>
         <td><%= playlist.genre %></td>
-        <td><%=l playlist.created_at %></td>
-        <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_playlist_path(playlist), :class => 'btn btn-default btn-xs' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      playlist_path(playlist),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-xs btn-danger' %>
-        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_playlist_path,
-            :class => 'btn btn-primary' %>
+<script>
+
+function sortTable(f,n){
+var rows = $('tbody  tr').get();
+
+rows.sort(function(a, b) {
+
+  var A = getVal(a);
+  var B = getVal(b);
+
+  if(A < B) {
+    return -1*f;
+  }
+  if(A > B) {
+    return 1*f;
+  }
+  return 0;
+});
+
+function getVal(elm){
+  var v = $(elm).children('td').eq(n).text().toUpperCase();
+  if($.isNumeric(v)){
+    v = parseInt(v,10);
+  }
+  return v;
+}
+
+$.each(rows, function(index, row) {
+  $('table').children('tbody').append(row);
+});
+}
+var f_sl = 1;
+var f_nm = 1;
+$("thead tr th").click(function(){
+  f_sl *= -1;
+  var n = $(this).prevAll().length;
+  sortTable(f_sl,n);
+});
+// $("thead tr th:last-child").click(function(){
+//   f_nm *= -1;
+//   var n = $(this).prevAll().length;
+//   sortTable(f_nm,n);
+// });
+
+</script>

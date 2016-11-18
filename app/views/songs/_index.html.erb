@@ -1,0 +1,24 @@
+<% model_class = Song %>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+
+<% songs = songs.order("title ASC") #sort incoming Playlist.songs %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:title) %> <i class="fa fa-sort"></i></th>
+      <th><%= model_class.human_attribute_name(:artist) %> <i class="fa fa-sort"></i></th>
+      <th><%= model_class.human_attribute_name(:bpm) %> <i class="fa fa-sort"></i></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% songs.each do |song| %>
+      <tr>
+        <td><%= link_to song.title,  song_path(song)%></td>
+        <td><%= song.artist %></td>
+        <td><%= song.bpm %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
