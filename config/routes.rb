@@ -1,20 +1,20 @@
 Rails.application.routes.draw do
-  resources :songs
-  resources :playlists
-  get 'playlists/index'
 
-  get 'playlists/show'
+  get 'sessions/new'
 
-  get 'playlists/create'
-
-  get 'playlists/delete'
-
-  get 'playlists/update'
-
-  get 'playlists/edit'
+  get 'sessions/create'
 
   root 'welcome#home'
-  get 'welcome/home'
+
+  mount ActionCable.server => '/cable'
+
+  resources :sessions, only: [:new, :create]
+
+  resources :songs
+  resources :playlists
+
+
+
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
