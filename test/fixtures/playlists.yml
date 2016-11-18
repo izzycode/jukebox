@@ -2,6 +2,8 @@
 
 one:
   name: MyString
+  genre: MyString
 
 two:
   name: MyString
+  genre: MyString
